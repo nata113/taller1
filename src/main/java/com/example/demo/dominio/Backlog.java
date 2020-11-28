@@ -2,30 +2,27 @@ package com.example.demo.dominio;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Backlog {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@NotNull (message = "El atributo projectIdentifier no puede ser nulo ")
+	@NotBlank (message = "El atributo projectIdentifier no puede estar vacío")
 	private String projectIdentifier;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="project_id", referencedColumnName = "id")
+	@OneToOne(mappedBy="backlog")
 	private Project project;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="backlog")
 	private List<ProjectTask> projectTasks;
 	

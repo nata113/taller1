@@ -2,40 +2,40 @@ package com.example.demo.dominio;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
 public class Project {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@NotNull
+	@NotBlank (message = "El atributo projectName no puede estar vacío")
 	@Column(unique = true)
 	private String projectName;
 
 	//No se puede actualizar
-	@NotNull
-	@Column(unique = true)
+	@NotBlank (message = "El atributo projectIdentifier no puede estar vacío")
 	@Size(min = 5, max = 7, message = "Este valor debe tener entre 5 y 7 caracteres")
+	@Column(unique = true)
 	private String projectIdentifier;
 
-	@NotNull
+	@NotBlank (message = "El atributo description no puede estar vacío")
 	private String description;
 
 	private Date startDate;
 
 	private Date endDate;
 
-	@OneToOne(mappedBy = "project")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="backlog_id", referencedColumnName = "id")
 	private Backlog backlog;
 	
 

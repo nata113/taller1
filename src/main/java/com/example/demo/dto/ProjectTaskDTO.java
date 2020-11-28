@@ -18,6 +18,8 @@ public class ProjectTaskDTO {
 	private String projectIdentifier;
 	private Backlog backlog;
 
+	public ProjectTaskDTO() {}
+	
 	public ProjectTaskDTO(Long id, String name, String summary, String acceptanceCriteria, String status, int priority,
 			Double hours, Date startDate, Date endDate, String projectIdentifier, Backlog backlog) {
 		super();

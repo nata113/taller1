@@ -3,37 +3,34 @@ package com.example.demo.dominio;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 public class ProjectTask {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@NotNull
-	@NotEmpty
+	@NotBlank(message = "El atributo name no puede estar vacío")
 	private String name;
 
-	@NotNull
+	@NotBlank(message = "El atributo summary no puede estar vacío")
 	private String summary;
 	private String acceptanceCriteria;
 
 	@Pattern(regexp = "not stared|in progress|completed|deleted", flags = Pattern.Flag.CASE_INSENSITIVE)
 	private String status;
 
-//	@Size(min = 1, max = 5, message = "Este valor debe estar comprendido entre 1 y 5")
+	@Range(min = 1, max = 5, message = "El valor del atributo priority debe estar comprendido entre 1 y 5")
 	private int priority;
 
-//	@Size(min = 1, max = 8, message = "Este valor debe estar comprendido entre 1 y 8")
+	@Range(min = 1, max = 8, message = "El valor del atributo hours debe estar comprendido entre 1 y 8")
 	private Double hours;
 	private Date startDate;
 	private Date endDate;

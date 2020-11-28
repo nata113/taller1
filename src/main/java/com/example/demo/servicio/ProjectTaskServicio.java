@@ -1,5 +1,6 @@
 package com.example.demo.servicio;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,10 @@ public class ProjectTaskServicio {
 
 	@Autowired
 	private IProjectTaskRepositorio projectTaskRepositorio;
-	
+
 	public boolean crearProjectTask(ProjectTaskDTO projectTaskDTO) {
-		
-		if(validar(projectTaskDTO)) {
+
+		if (validar(projectTaskDTO)) {
 			ProjectTask projectTask = mapearAEntidad(projectTaskDTO);
 
 			try {
@@ -29,7 +30,7 @@ public class ProjectTaskServicio {
 		} else {
 			return false;
 		}
-		
+
 	}
 
 	private ProjectTask mapearAEntidad(ProjectTaskDTO projectTaskDTO) {
@@ -46,12 +47,12 @@ public class ProjectTaskServicio {
 		projectTask.setEndDate(projectTaskDTO.getEndDate());
 		projectTask.setProjectIdentifier(projectTaskDTO.getProjectIdentifier());
 		projectTask.setBacklog(projectTaskDTO.getBacklog());
-		
+
 		return projectTask;
-	} 
-	
+	}
+
 	private boolean validar(ProjectTaskDTO projectTaskDTO) {
-		if(null == projectTaskDTO.getId()) {
+		if (null == projectTaskDTO.getId()) {
 			return false;
 		}
 		Optional<ProjectTask> projectTaskBD = projectTaskRepositorio.findById(projectTaskDTO.getId());
@@ -59,8 +60,52 @@ public class ProjectTaskServicio {
 		if (projectTaskBD.isPresent()) {
 			return false;
 		}
-		
+
 		return true;
+	}
+
+	public List<ProjectTask> obtenerTareasProyecto(String projectIdentifier) {
+		return projectTaskRepositorio.obtenerTareasPorProyecto(projectIdentifier);
+	}
+
+	public Double obtenerHorasProyecto(String projectIdentifier) {
+		Double totalHoras = 0D;
+		List<ProjectTask> projectTasks = projectTaskRepositorio.obtenerTareasExistentesPorProyecto(projectIdentifier);
+
+		for (ProjectTask item : projectTasks) {
+			if (!item.getStatus().equals("deleted")) {
+				totalHoras += item.getHours();
+			}
+		}
+
+		return totalHoras;
+	}
+	
+	
+	public Double obtenerHorasProyectoPorStatus(String projectIdentifier, String status) {
+		Double totalHoras = 0D;
+		List<ProjectTask> projectTasks = projectTaskRepositorio.obtenerTareasExistentesPorProyecto(projectIdentifier);
+
+		for (ProjectTask item : projectTasks) {
+			if (item.getStatus().equals(status)) {
+				totalHoras += item.getHours();
+			}
+		}
+
+		return totalHoras;
+	}
+	
+	public boolean eliminarTarea(String projectIdentifier, Long id) {
+		ProjectTask projectTaskEliminada = null;
+		ProjectTask projectTaskBD = projectTaskRepositorio.obtenerTareaPorIdEIdentificador(projectIdentifier, id);
 		
+		if(null != projectTaskBD) {
+			projectTaskBD.setStatus("deleted");
+			
+			
+			projectTaskEliminada = projectTaskRepositorio.save(projectTaskBD);
+		}
+		
+		return null != projectTaskEliminada;
 	}
 }
