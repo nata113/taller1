@@ -10,8 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Backlog {
@@ -20,7 +19,7 @@ public class Backlog {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@NotNull  
+	@NotNull (message = "El atributo projectIdentifier no puede ser nulo ")
 	private String projectIdentifier;
 	
 	@OneToOne(cascade = CascadeType.ALL)

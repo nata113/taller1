@@ -1,49 +1,38 @@
-package com.example.demo.dominio;
+package com.example.demo.dto;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import com.example.demo.dominio.Backlog;
 
-@Entity
-public class ProjectTask {
+public class ProjectTaskDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	@NotNull
-	@NotEmpty
 	private String name;
-
-	@NotNull
 	private String summary;
 	private String acceptanceCriteria;
-
-	@Pattern(regexp = "not stared|in progress|completed|deleted", flags = Pattern.Flag.CASE_INSENSITIVE)
 	private String status;
-
-//	@Size(min = 1, max = 5, message = "Este valor debe estar comprendido entre 1 y 5")
 	private int priority;
-
-//	@Size(min = 1, max = 8, message = "Este valor debe estar comprendido entre 1 y 8")
 	private Double hours;
 	private Date startDate;
 	private Date endDate;
-
-	// No se puede actualizar
 	private String projectIdentifier;
-
-	@ManyToOne
-	@JoinColumn(name = "backlog_id", nullable = false)
 	private Backlog backlog;
+
+	public ProjectTaskDTO(Long id, String name, String summary, String acceptanceCriteria, String status, int priority,
+			Double hours, Date startDate, Date endDate, String projectIdentifier, Backlog backlog) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.summary = summary;
+		this.acceptanceCriteria = acceptanceCriteria;
+		this.status = status;
+		this.priority = priority;
+		this.hours = hours;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.projectIdentifier = projectIdentifier;
+		this.backlog = backlog;
+	}
 
 	public Long getId() {
 		return id;

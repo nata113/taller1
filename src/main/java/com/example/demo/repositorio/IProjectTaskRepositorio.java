@@ -3,9 +3,9 @@ package com.example.demo.repositorio;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.dominio.Persona;
+import com.example.demo.dominio.ProjectTask;
 
 @Repository
-public interface IPersonaRepositorio extends CrudRepository<Persona, Long>{
-	
+public interface IProjectTaskRepositorio extends CrudRepository<ProjectTask, Long>{
+
 }
