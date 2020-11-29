@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 @EnableConfigServer
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 public class Taller1Application {
 
 	@GetMapping("/")

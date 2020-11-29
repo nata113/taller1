@@ -11,6 +11,8 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Range;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class ProjectTask {
 
@@ -32,7 +34,11 @@ public class ProjectTask {
 
 	@Range(min = 1, max = 8, message = "El valor del atributo hours debe estar comprendido entre 1 y 8")
 	private Double hours;
+	
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date startDate;
+	
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date endDate;
 
 	// No se puede actualizar

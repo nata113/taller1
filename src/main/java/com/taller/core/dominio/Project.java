@@ -11,6 +11,8 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Project {
 
@@ -30,8 +32,10 @@ public class Project {
 	@NotBlank (message = "El atributo description no puede estar vacío")
 	private String description;
 
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date startDate;
 
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date endDate;
 
 	@OneToOne(cascade = CascadeType.ALL)
