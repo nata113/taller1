@@ -9,12 +9,12 @@
 		<version>2.3.4.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>DemoWeb</artifactId>
+	<groupId>com.taller</groupId>
+	<artifactId>core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>DemoWeb</name>
-	<description>Demo web project</description>
+	<name>Taller1</name>
+	<description>Taller 1 project</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -79,6 +79,17 @@
 			<artifactId>hamcrest-all</artifactId>
 			<version>1.3</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+			<version>2.2.6.RELEASE</version>
 		</dependency>
 
 	</dependencies>
