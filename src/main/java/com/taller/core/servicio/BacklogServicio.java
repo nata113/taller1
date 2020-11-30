@@ -1,5 +1,7 @@
 package com.taller.core.servicio;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +16,22 @@ public class BacklogServicio {
 	private IBacklogRepositorio backlogRepositorio;
 
 	public boolean crearBacklog(BacklogDTO backlogDTO) {
+		Optional<Backlog> backlogBD = backlogRepositorio.findById(backlogDTO.getId());
+
+		if (backlogBD.isPresent()) {
+			System.out.println("===================================");
+			System.out.println("Ya existe un Backlog con este ID");
+			System.out.println("===================================");
+			return false;
+		}
+		
 		Backlog backlog = mapearAEntidad(backlogDTO);
 
 		try {
 			backlogRepositorio.save(backlog);
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}

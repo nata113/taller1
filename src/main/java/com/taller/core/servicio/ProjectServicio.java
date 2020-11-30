@@ -26,6 +26,9 @@ public class ProjectServicio {
 		Optional<Project> projectBD = projectRepositorio.findById(projectDTO.getId());
 
 		if (projectBD.isPresent()) {
+			System.out.println("===================================");
+			System.out.println("Ya existe un Proyecto con este ID");
+			System.out.println("===================================");
 			return false;
 		}
 
@@ -35,6 +38,7 @@ public class ProjectServicio {
 			projectRepositorio.save(project);
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}

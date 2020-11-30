@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -38,7 +39,8 @@ public class Project {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date endDate;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@NotNull
+	@OneToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name="backlog_id", referencedColumnName = "id")
 	private Backlog backlog;
 	

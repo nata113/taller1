@@ -25,6 +25,7 @@ public class ProjectTaskServicio {
 				projectTaskRepositorio.save(projectTask);
 				return true;
 			} catch (Exception e) {
+				e.printStackTrace();
 				return false;
 			}
 		} else {
@@ -58,6 +59,9 @@ public class ProjectTaskServicio {
 		Optional<ProjectTask> projectTaskBD = projectTaskRepositorio.findById(projectTaskDTO.getId());
 
 		if (projectTaskBD.isPresent()) {
+			System.out.println("===================================");
+			System.out.println("Ya existe una Tarea con este ID");
+			System.out.println("===================================");
 			return false;
 		}
 
