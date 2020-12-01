@@ -54,6 +54,9 @@ public class ProjectTaskServicio {
 
 	private boolean validar(ProjectTaskDTO projectTaskDTO) {
 		if (null == projectTaskDTO.getId()) {
+			System.out.println("===================================");
+			System.out.println("El ID no puede estar nulo");
+			System.out.println("===================================");
 			return false;
 		}
 		Optional<ProjectTask> projectTaskBD = projectTaskRepositorio.findById(projectTaskDTO.getId());

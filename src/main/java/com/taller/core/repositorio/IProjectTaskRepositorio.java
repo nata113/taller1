@@ -12,10 +12,6 @@ import com.taller.core.dominio.ProjectTask;
 @Repository
 public interface IProjectTaskRepositorio extends CrudRepository<ProjectTask, Long>{
 	
-//	@Query("SELECT b.projectTasks "
-//			+ "FROM Backlog b "
-//			+ "where b.projectIdentifier = :projectIdentifier")
-//	List<ProjectTask> obtenerTareasPorProyecto(@Param("projectIdentifier") String projectIdentifier);
 	@Query("SELECT b.projectTasks "
 			+ "FROM Project p "
 			+ "JOIN p.backlog b "
