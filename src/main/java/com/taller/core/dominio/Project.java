@@ -24,7 +24,6 @@ public class Project {
 	@Column(unique = true)
 	private String projectName;
 
-	//No se puede actualizar
 	@NotBlank (message = "El atributo projectIdentifier no puede estar vacío")
 	@Size(min = 5, max = 7, message = "Este valor debe tener entre 5 y 7 caracteres")
 	@Column(unique = true)

@@ -41,7 +41,6 @@ public class ProjectTask {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date endDate;
 
-	// No se puede actualizar
 	private String projectIdentifier;
 
 	@ManyToOne
