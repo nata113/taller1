@@ -77,7 +77,7 @@ public class ProjectTaskServicio {
 
 	public Double obtenerHorasProyecto(String projectIdentifier) {
 		Double totalHoras = 0D;
-		List<ProjectTask> projectTasks = projectTaskRepositorio.obtenerTareasExistentesPorProyecto(projectIdentifier);
+		List<ProjectTask> projectTasks = projectTaskRepositorio.obtenerTareasPorProyecto(projectIdentifier);
 
 		for (ProjectTask item : projectTasks) {
 			if (!item.getStatus().equals("deleted")) {
@@ -91,7 +91,7 @@ public class ProjectTaskServicio {
 	
 	public Double obtenerHorasProyectoPorStatus(String projectIdentifier, String status) {
 		Double totalHoras = 0D;
-		List<ProjectTask> projectTasks = projectTaskRepositorio.obtenerTareasExistentesPorProyecto(projectIdentifier);
+		List<ProjectTask> projectTasks = projectTaskRepositorio.obtenerTareasPorProyecto(projectIdentifier);
 
 		for (ProjectTask item : projectTasks) {
 			if (item.getStatus().equals(status)) {

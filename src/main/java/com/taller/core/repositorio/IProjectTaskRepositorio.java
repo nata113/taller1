@@ -15,15 +15,9 @@ public interface IProjectTaskRepositorio extends CrudRepository<ProjectTask, Lon
 	@Query("SELECT b.projectTasks "
 			+ "FROM Project p "
 			+ "JOIN p.backlog b "
-			+ "where p.projectIdentifier = :projectIdentifier")
+			+ "WHERE p.projectIdentifier = :projectIdentifier")
 	List<ProjectTask> obtenerTareasPorProyecto(@Param("projectIdentifier") String projectIdentifier);
 	
-	
-	@Query("SELECT b.projectTasks "
-			+ "FROM Backlog b "
-			+ "WHERE b.projectIdentifier = :projectIdentifier ")
-	List<ProjectTask> obtenerTareasExistentesPorProyecto(@Param("projectIdentifier") String projectIdentifier);
-
 	
 	@Query("SELECT p "
 			+ "FROM ProjectTask p "
